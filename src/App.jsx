@@ -1,18 +1,24 @@
 import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom';
 import './App.css'
 import Header from './components/Header'
 import NavBar from './components/NavBar'
-import Topics from './components/Topics'
-import Articles from './components/Articles'
+import Home from './pages/home';
+import Submit_Article from './pages/submit_article';
+import View_Article from './pages/view_article';
 
 function App() {
+  const [currentArticle, setCurrentArticle] = useState({})
 
   return (
     <>
     <Header />
     <NavBar />
-    <Topics />
-    <Articles />
+    <Routes>
+        <Route path="/" element={<Home />} setCurrentArticle={setCurrentArticle} />
+        <Route path="/submit" element={<Submit_Article />} />
+        <Route path="/:article_id" element={<View_Article />} />
+      </Routes>
     </>
   )
 }

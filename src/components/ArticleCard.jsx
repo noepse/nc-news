@@ -6,6 +6,8 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import { Link } from 'react-router-dom';
+
 const bull = (
   <Box
     component="span"
@@ -17,7 +19,13 @@ const bull = (
 
 
 export default function ArticleCard(props) {
-    const {article} = props
+    const {article, setCurrentArticle} = props
+
+    // function handleClick(){
+    //     setCurrentArticle(article)
+    // }
+
+
   return (
     <Box sx={{ minWidth: 250 }} className = "articleCard">
       <Card variant="outlined">
@@ -30,11 +38,11 @@ export default function ArticleCard(props) {
         {article.title}
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        {article.author}
+        by {article.author}
       </Typography>
     </CardContent>
     <CardActions>
-      <Button size="small">Read article</Button>
+      <Button size="small" ><Link to={`/${article.article_id}`}>Read article</Link></Button>
     </CardActions>
     </Card>
     </Box>
