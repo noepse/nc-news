@@ -44,3 +44,29 @@ export const patchVotesOnArticleById = (articleId, votes) => {
         console.log(err)
     })
 }
+
+export const postCommentOnArticleById = (articleId, user, comment)=>{
+    const requestBody = {
+        username: user,
+        body: comment
+    }
+    return api
+    .post(`/articles/${articleId}/comments`, requestBody)
+    .then((response) => {
+        return response.data.comment
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
+
+export const getUserByUsername = (username)=>{
+    return api
+    .get(`/users/${username}`)
+    .then((response) => {
+        return response.data.user
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
