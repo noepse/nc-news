@@ -31,3 +31,14 @@ export const getCommentsbyId = (articleId) =>{
         console.log(err)
     })
 }
+
+export const patchVotesOnArticleById = (articleId, votes) => {
+    return axios
+    .patch(`${baseURL}/articles/${articleId}`, {inc_votes: votes})
+    .then((response) => {
+        return response.data.article
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
