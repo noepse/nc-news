@@ -82,11 +82,29 @@ h1{
 }
 
 #postCommentContainer{
+  max-width: 100%;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 1em;
+  margin: 3em 0em 2em 0em;
+}
+
+.commentForm{
+  width: 100%;
+}
+
+.commentInput{
+  width: 100%;
+}
+#postCommentBtn{
+  align-self: flex-end;
+  margin: 1em;
+}
+
+.avatar{
+  width: 10%;
+  display: inline-block;
 }
 
 .comment{
