@@ -1,18 +1,20 @@
 import axios from 'axios';
 
-const baseURL = 'https://news-app-2.onrender.com/api'
+const api = axios.create({
+    baseURL: 'https://news-app-2.onrender.com/api',
+  });
 
 export const getArticles = ()=>{
-    return axios
-    .get(`${baseURL}/articles`)
+    return api
+    .get(`/articles`)
     .then((response) => {
         return response.data.articles
     })
 }
 
 export const getArticleById = (articleId) => {
-    return axios
-    .get(`${baseURL}/articles/${articleId}`)
+    return api
+    .get(`/articles/${articleId}`)
     .then((response) => {
         return response.data.article
     })
@@ -22,8 +24,8 @@ export const getArticleById = (articleId) => {
 }
 
 export const getCommentsbyId = (articleId) =>{
-    return axios
-    .get(`${baseURL}/articles/${articleId}/comments`)
+    return api
+    .get(`/articles/${articleId}/comments`)
     .then((response) => {
         return response.data.comments
     })
@@ -33,8 +35,8 @@ export const getCommentsbyId = (articleId) =>{
 }
 
 export const patchVotesOnArticleById = (articleId, votes) => {
-    return axios
-    .patch(`${baseURL}/articles/${articleId}`, {inc_votes: votes})
+    return api
+    .patch(`/articles/${articleId}`, {inc_votes: votes})
     .then((response) => {
         return response.data.article
     })
