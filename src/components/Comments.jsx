@@ -5,24 +5,28 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-import { getComments } from "../utils/api";
+import { getCommentsbyId } from "../utils/api";
 import CommentCard from "./CommentCard";
 
 export default function Comments(props) {
 
     const [comments, setComments] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
 
     const {article_id} = props
 
     useEffect(()=>{
-        getComments(article_id).then((commentsData)=>{
-            setComments(commentsData)
+        setIsLoading(true);
+        getCommentsbyId(article_id)
+        .then((commentsData)=>{
+            setIsLoading(false);
+            setComments(commentsData);
         })
     }, [])
 
   return (
     <>
-    <div id="postCommentContainer">
+    {/* <section id="postCommentContainer">
       <img src="" alt="Logged in user avatar"></img>
       <Box
         component="form"
@@ -42,12 +46,23 @@ export default function Comments(props) {
         </div>
       </Box>
       <Button variant="contained">Post comment</Button>
-    </div>
-    <div className="allComments">
-        {comments.map((comment)=>{
-            return <CommentCard key = {comment.comment_id} comment = {comment}/>
-        })}
-    </div>
+    </section> */}
+        {comments.length === 0 || isLoading ? (
+                    <div className="comment">
+                    <span>{isLoading ? (
+                        'Loading comments...' ) : (
+                            'No comments'
+                        )}</span>
+                    </div> 
+                    ) : (
+                <section className="allComments">
+
+                {comments.map((comment)=>{
+                    return <CommentCard key = {comment.comment_id} comment = {comment}/>
+                })}
+            </section>
+        )}
+
     </>
   );
 }
