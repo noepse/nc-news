@@ -16,6 +16,7 @@ import { faThumbsUp as outlineThumbsUp, faThumbsDown as outlineThumbsDown } from
 export default function View_Article(){
 
     const [currentArticle, setCurrentArticle] = useState({})
+    const [currentVotes, setCurrentVotes] = useState(null)
     const [isLoading, setIsLoading] = useState(true);
     const [isUpVoted, setIsUpVoted] = useState(false);
     const [isDownVoted, setIsDownVoted] = useState(false);
@@ -25,12 +26,14 @@ export default function View_Article(){
     const { article_id } = useParams();
 
     useEffect(()=>{
+        console.log(currentVotes)
         setIsLoading(true);
         scrollToTop();
         getArticleById(article_id)
         .then((articleData)=>{
             setIsLoading(false);
             setCurrentArticle(articleData)
+            setCurrentVotes(articleData.votes)
         })
     }, [])
 
@@ -50,7 +53,7 @@ export default function View_Article(){
         if(isVoted){
             votes = -votes
         }
-
+        setCurrentVotes(currentVotes + votes)
         setIsVoted(!isVoted)
 
         patchVotesOnArticleById(article_id, votes)
@@ -74,7 +77,7 @@ return (
     <main id="fullArticle">
         <img src={currentArticle.article_img_url} width = "100%"></img>
         <div id = "articleCounts">
-            <span>{currentArticle.votes} votes </span> <span>{currentArticle.comment_count} comments </span>
+            <span>{currentVotes} votes </span> <span>{currentArticle.comment_count} comments </span>
         </div>
         
         <h2>{currentArticle.title}</h2>
