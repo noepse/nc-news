@@ -18,3 +18,14 @@ export const getArticleById = (articleId) => {
         console.log(err)
     })
 }
+
+export const getComments = (articleId) =>{
+    return axios
+    .get(`https://news-app-2.onrender.com/api/articles/${articleId}/comments`)
+    .then((response) => {
+        return response.data.comments
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}

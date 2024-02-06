@@ -15,11 +15,18 @@ html{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 }
 
 body{
   background-color: rgb(239, 239, 239);
   padding-bottom: 50px;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  font-weight: bold
 }
 
 header{
@@ -29,6 +36,15 @@ header{
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid rgb(208, 208, 208);
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
 }
 
 #navbar{
@@ -62,6 +78,22 @@ h1{
 #articleCounts{
   display: flex;
   justify-content: space-between;
+}
+
+#postCommentContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.comment{
+  background: white;
+  padding: 1em;
+  border-radius: 5px;
+  border: 1px solid rgb(208, 208, 208);
+  margin-bottom: 1em;
 }
 
 @media only screen and (min-width: 600px) {
