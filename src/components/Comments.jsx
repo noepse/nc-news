@@ -66,7 +66,7 @@ export default function Comments(props) {
     <section id="postCommentContainer">
       <form onSubmit = {handleSubmit} className = "commentForm">
         <Stack direction="row" spacing={2}>
-        <Avatar alt="Logged in user avatar" src="/static/images/avatar/1.jpg" />
+        <Avatar alt="Logged in user avatar" src={currentUser.Avatar} />
           <TextField className = "commentInput"
             id="outlined-multiline-flexible"
             label="Enter a comment"

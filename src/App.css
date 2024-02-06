@@ -39,6 +39,12 @@ header{
   border-bottom: 2px solid rgb(208, 208, 208);
 }
 
+.userContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -81,6 +87,12 @@ h1{
   justify-content: space-between;
 }
 
+.voteBtn{
+  color:#535bf2;
+}
+
+
+
 #postCommentContainer{
   max-width: 100%;
   width: 100%;
@@ -98,8 +110,8 @@ h1{
   width: 100%;
 }
 #postCommentBtn{
-  align-self: flex-end;
-  margin: 1em;
+  float: right;
+  margin: 1em 0em;
 }
 
 .avatar{

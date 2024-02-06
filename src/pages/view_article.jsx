@@ -84,7 +84,7 @@ return (
 
         <IconButton aria-label="upvote article" onClick = {()=>{
             handleVote(1)
-        }} disabled = {isDownVoted}>
+        }} disabled = {isDownVoted} className = "voteBtn">
         {isUpVoted?<FontAwesomeIcon icon={solidThumbsUp} /> :  <FontAwesomeIcon icon={outlineThumbsUp} /> }
       </IconButton>
       <IconButton aria-label="downvote article" onClick = {()=>{
