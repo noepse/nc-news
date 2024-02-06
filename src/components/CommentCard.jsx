@@ -1,3 +1,5 @@
+import ReactDOM from 'react-dom'
+
 export default function CommentCard(props){
     const {comment} = props
     return (
