@@ -4,8 +4,10 @@ export default function CommentCard(props){
     const {comment} = props
     return (
         <div className="comment">
-        <span>{comment.author} </span>
-        <span>|  {comment.created_at}</span>
+        <div className = "commentHeader">
+        <span>{comment.author} |  {comment.created_at}</span>
+        {props.children}
+        </div>
         <p>{comment.body}</p>
         <span>{comment.votes} votes</span>
         </div>
