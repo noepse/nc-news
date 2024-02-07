@@ -26,7 +26,6 @@ export default function View_Article(){
     const { article_id } = useParams();
 
     useEffect(()=>{
-        console.log(currentVotes)
         setIsLoading(true);
         scrollToTop();
         getArticleById(article_id)

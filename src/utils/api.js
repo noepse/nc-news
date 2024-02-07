@@ -70,3 +70,14 @@ export const getUserByUsername = (username)=>{
         console.log(err)
     })
 }
+
+export const deleteCommentById = ((commentId)=>{
+    return api
+    .delete(`/comments/${commentId}`)
+    .then((response) => {
+        return response
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+})
