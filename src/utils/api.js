@@ -81,3 +81,14 @@ export const deleteCommentById = ((commentId)=>{
         console.log(err)
     })
 })
+
+export const getTopics = ()=>{
+    return api
+    .get(`/topics`)
+    .then((response) => {
+        return response.data.topics
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}

@@ -26,6 +26,7 @@ function App() {
     <NavBar />
     <Routes>
         <Route path="/" element={<Home />} setCurrentArticle={setCurrentArticle} />
+        <Route path="/articles/:topic_name"element={<Home />} setCurrentArticle={setCurrentArticle} />
         <Route path="/submit" element={<Submit_Article />} />
         <Route path="/:article_id" element={<View_Article />} />
       </Routes>
