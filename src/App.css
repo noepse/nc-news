@@ -82,6 +82,24 @@ a:hover {
   padding: 1em;
 }
 
+.sortHeader{
+  padding: 0em 2em;
+  width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 2em;
+}
+
+.sortHeader h2{
+  text-transform: uppercase;
+  font-size: 1.2em;
+}
+
+nav.sortBtn {
+  padding: 0;
+}
+
 .articleCard{
   width: 100%;
   max-width: 450px;
