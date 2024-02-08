@@ -7,11 +7,11 @@
 }
 
 html{
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
 }
 
 #root {
-  width: 80%;
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
@@ -58,7 +58,19 @@ a:hover {
 }
 
 #navbar{
-  margin: 2em 0em;
+  margin-top: 2em;
+  display: flex;
+}
+
+#topics{
+  text-transform: uppercase;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1em 0em;
+  gap: 1em;
 }
 
 #articles{
@@ -66,7 +78,8 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  align-items: center;;
+  align-items: center;
+  padding: 1em;
 }
 
 .articleCard{
@@ -158,6 +171,7 @@ h1{
     gap: 1em;
   }
   .articleCard{
-    width: 45%;
+    width: 20px
   }
+
 }
