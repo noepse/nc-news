@@ -1,4 +1,5 @@
 import ArticleCard from './ArticleCard.jsx'
+import Sorter from './Sorter.jsx'
 import { useEffect, useState } from 'react'
 import { getArticles } from '../utils/api.js'
 
@@ -15,7 +16,10 @@ export default function Articles(props){
     }, [])
     return (
         <>
+        <div className="sortHeader">
         <h2>{currentTopic}</h2>
+        <Sorter />
+        </div>
         {isLoading? <p>Loading articles...</p> : (
     <main id="articles">
             {articles.map((article)=>{

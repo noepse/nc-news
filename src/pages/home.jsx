@@ -5,7 +5,7 @@ import { useState } from 'react'
 export default function Home(props){
     const [allArticles, setAllArticles] = useState([])
     const [articles, setArticles] = useState(allArticles)
-    const [currentTopic, setCurrentTopic] = useState('recently added')
+    const [currentTopic, setCurrentTopic] = useState('newly added')
     const {setCurrentArticle} = props
     return (
         <>
