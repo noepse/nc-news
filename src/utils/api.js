@@ -33,6 +33,9 @@ export const getArticles = (topic, query)=>{
     .then((response) => {
         return response.data.articles
     })
+    .catch((err)=>{
+        return Promise.reject(err.response.data)
+    })
 }
 
 export const getArticleById = (articleId) => {
@@ -42,7 +45,7 @@ export const getArticleById = (articleId) => {
         return response.data.article
     })
     .catch((err)=>{
-        console.log(err)
+        return Promise.reject(err.response.data)
     })
 }
 
