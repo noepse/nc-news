@@ -4,9 +4,23 @@ const api = axios.create({
     baseURL: 'https://news-app-2.onrender.com/api',
   });
 
-export const getArticles = ()=>{
+export const getArticles = (topic, query)=>{
+    let queryStr = ''
+
+    if(topic && topic !== 'all'){
+        queryStr=`topic=${topic}&`
+    }
+    if (query && query.sort_by && query.sort_by !== 'comment_count' && query.sort_by !== 'votes'){
+        queryStr+=`sort_by=${query.sort_by}&`
+    }
+    if (query && query.order){
+        queryStr += `order_by=${query.order}`
+    }
+
+    // console.log(queryStr)
+
     return api
-    .get(`/articles`)
+    .get(`/articles/?${queryStr}`)
     .then((response) => {
         return response.data.articles
     })

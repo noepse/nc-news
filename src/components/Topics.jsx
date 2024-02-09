@@ -1,20 +1,16 @@
 import { useState, useEffect } from "react"
-import { getTopics } from "../utils/api"
+import { getArticles, getTopics } from "../utils/api"
 import TopicCard from "./TopicCard"
-import { useNavigate } from 'react-router-dom';
 
 import { Link } from "react-router-dom"
 import Button from '@mui/material/Button';
 import * as React from 'react';
 
-
 export default function Topics(props){
-    const {setArticles, allArticles, setCurrentTopic} = props
+    const {setArticles, setIsLoadingArticles} = props
 
     const [topics, setTopics] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
-
-    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(()=>{
         setIsLoading(true)
@@ -26,26 +22,27 @@ export default function Topics(props){
     }, [])
 
     function handleClick(topicName) {
-        setCurrentTopic(topicName)
-        setArticles(()=>{
-            if(topicName==='all articles'){
-                return allArticles
-            }
-            return allArticles.filter((article)=>{
-                return article.topic === topicName
-            })
-        })
+        // setIsLoadingArticles(true)
+
+        // getArticles(topicName)
+        // .then((articleData)=>{
+        //     setIsLoadingArticles(false)
+        //     setArticles(articleData)
+        // })
         }
 
     return (
         <>
     <section id = "topics">
-        {topics.map((topic)=>{
-            return <TopicCard key = {topic.slug} topic = {topic} handleClick={handleClick}/>
-        })}
+            {isLoading? <p>Loading topics...</p> : (
+                <>
+                        {topics.map((topic)=>{
+                            return <TopicCard key = {topic.slug} topic = {topic} handleClick={handleClick}/>
+                        })}
         <Button variant="text" onClick={()=>{
-            handleClick('all articles')
+            handleClick('')
         }}><Link to = {`/articles/all`}>view all</Link></Button>
+           </> )}
     
     </section>
     </>
