@@ -2,7 +2,7 @@
 
 A fully responsive news app which displays articles and associated comments.
 
-Access Newsie [here](https://news-app-2.onrender.com/api/) ⭐
+Access Newsie [here](https://newsie-app.netlify.app/) ⭐
 
 
 ## Features
