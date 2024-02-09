@@ -5,8 +5,11 @@ const api = axios.create({
   });
 
 export const getArticles = (topic, query)=>{
+    const {sort_by, order} = query
+
     let queryStr = ''
 
+    // could use axios params - however need to implement logic to exclude comment_count and votes from sort_by
     if(topic && topic !== 'all'){
         queryStr=`topic=${topic}&`
     }
@@ -17,10 +20,16 @@ export const getArticles = (topic, query)=>{
         queryStr += `order_by=${query.order}`
     }
 
-    // console.log(queryStr)
-
     return api
-    .get(`/articles/?${queryStr}`)
+    .get(`/articles/?${queryStr}`, 
+    // {
+    //     params: {
+    //         topic: topic,
+    //         sort_by: sort_by,
+    //         order_by: order
+    //     }
+    // }
+    )
     .then((response) => {
         return response.data.articles
     })
