@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getArticleById, patchVotesOnArticleById } from '../utils/api';
 
 import Comments from '../components/Comments';
+import Error from '../components/Error';
 
 import * as React from 'react';
 import Button from '@mui/material/Button';
@@ -21,7 +22,8 @@ export default function View_Article(){
     const [isUpVoted, setIsUpVoted] = useState(false);
     const [isDownVoted, setIsDownVoted] = useState(false);
     const [isVoted, setIsVoted] = useState(false)
-    const [error, setError] = useState(null)
+
+    const [error, setError] = useState({apiError: null, voteError: null})
 
     const { article_id } = useParams();
 
@@ -30,9 +32,14 @@ export default function View_Article(){
         scrollToTop();
         getArticleById(article_id)
         .then((articleData)=>{
+            setError(false)
             setIsLoading(false);
             setCurrentArticle(articleData)
             setCurrentVotes(articleData.votes)
+        })
+        .catch((error)=>{
+            setError({apiError: error})
+            setIsLoading(false);
         })
     }, [])
 
@@ -61,16 +68,14 @@ export default function View_Article(){
             setCurrentArticle(articleData)
         })
         .catch((err)=>{
-            setError(err);
+            setError({voteError: err});
         })
     }
 
 return (
     <>
-        {  isLoading ? (
-            <>
-            <p>Loading article ... </p>
-          </>
+        { error.apiError || isLoading ? (
+            error.apiError ? <Error error={error.apiError}/> : <p>Loading article ... </p>
          ) : (
 <>
     <main id="fullArticle">
@@ -92,7 +97,7 @@ return (
         {isDownVoted ? <FontAwesomeIcon icon={solidThumbsDown} /> : <FontAwesomeIcon icon={outlineThumbsDown} /> }
       </IconButton>
       
-      {error ? <p>{error.msg}</p>: null}
+      {error.voteError ? <p>{error.voteError.msg}</p>: null}
       
         <h4 id = "articleTopic">{currentArticle.topic}</h4>
         <h3>by {currentArticle.author}</h3>
