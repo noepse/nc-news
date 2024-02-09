@@ -1,8 +1,59 @@
-# React + Vite
+# newsie - articles app 📰
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully responsive news app which displays articles and associated comments.
 
-Currently, two official plugins are available:
+Access Newsie [here](https://news-app-2.onrender.com/api/) ⭐
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Features
+
+Allows users to filter articles, post comments and vote on articles. Posted comments can be deleted after posting by refreshing the page and clicking the delete button. Displays relevant error messages where appropriate e.g. unknown paths and empty comment inputs.
+
+## Database and API
+
+Access backend repo [here](https://github.com/noepse/news-api) ⭐
+
+## Running project locally
+
+1. **Clone this repo** to your local machine by running one of the commands below in terminal within the folder you wish to work in
+
+```
+git clone https://github.com/noepse/news-app.git
+git clone git@github.com:noepse/news-app.git
+```
+
+
+2. Navigate into the created folder
+
+```
+cd news-app
+```
+
+3. Install dependencies 
+
+```
+npm install
+```
+
+4. Run app in browser on local server
+
+```
+npm run dev
+```
+
+### Minimum requirements
+
+1. node.js - version ^20.9.0
+
+### Future features
+
+- Change user
+- Post new articles
+- Search articles by search query
+
+## Contact
+
+Feel free to reach out via any of the routes below.
+
+- Fill out this [online form](https://simranamin.com/#contact)
+- Connect with me on [LinkedIn](https://www.linkedin.com/in/simran-amin/)
