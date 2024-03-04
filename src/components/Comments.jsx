@@ -46,11 +46,13 @@ export default function Comments(props) {
       setIsPosting(false);
     } else {
       const newCommentsObj = {
-        username: currentUser.username,
+        author: currentUser.username,
         body: commentToSubmit,
+        created_at: 'now',
+        votes: 0,
       };
-      setNewComments((otherNewComments) => {
-        return [newCommentsObj, ...otherNewComments];
+      setComments((otherComments) => {
+        return [newCommentsObj, ...otherComments];
       });
       postCommentOnArticleById(
         article_id,
@@ -61,6 +63,7 @@ export default function Comments(props) {
           setPostCommentError(null);
           setCurrentInput("");
           setIsPosting(false);
+          console.log(commentData)
         })
         .catch((errorMsg) => {
           setPostCommentError(errorMsg);
@@ -115,7 +118,7 @@ export default function Comments(props) {
           </Button>
         </form>
       </section>
-      {newComments.length !== 0
+      {/* {newComments.length !== 0
         ? newComments.map((newComment, index) => {
             return (
               <div className="comment" key={index}>
@@ -124,7 +127,7 @@ export default function Comments(props) {
               </div>
             );
           })
-        : null}
+        : null} */}
       {comments.length === 0 || isLoading ? (
         <div className="comment">
           <span>{isLoading ? "Loading comments..." : "No comments"}</span>
@@ -138,7 +141,7 @@ export default function Comments(props) {
                   {comment.author === currentUser.username ? (
                     <IconButton
                       aria-label="delete comment"
-                      disabled = {isDeleting}
+                      disabled = {isDeleting || isPosting}
                       onClick = {()=>{
                         handleDelete(comment.comment_id)
                         
