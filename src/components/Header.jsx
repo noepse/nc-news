@@ -7,9 +7,10 @@ import Avatar from '@mui/material/Avatar';
 
 export default function Header(){
     const { currentUser } = useContext(CurrentUserContext);
+    console.log(currentUser)
     return (<header><div class="headerContainer"><h1><Link to = "/" >newsie</Link></h1>
     <div className = "userContainer">
-    <Avatar alt="Logged in user avatar" src={currentUser.Avatar} />
+    <Avatar alt="Logged in user avatar" src={currentUser.avatar_url} />
         </div>        
     </div></header>
     )
