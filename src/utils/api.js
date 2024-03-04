@@ -5,7 +5,6 @@ const api = axios.create({
   });
 
 export const getArticles = (topic, query)=>{
-    const {sort_by, order} = query
 
     let queryStr = ''
 
