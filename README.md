@@ -8,7 +8,7 @@ NOTE: The server may take a few minutes to load at first
 
 ## Features
 
-Allows users to filter articles, post comments and vote on articles. Posted comments can be deleted after posting by refreshing the page and clicking the delete button. Displays relevant error messages where appropriate e.g. unknown paths and empty comment inputs.
+Allows users to filter articles by topic, sort articles, post comments, delete comments and vote on articles. Displays relevant error messages where appropriate e.g. unknown paths and empty comment inputs.
 
 ## Database and API
 
