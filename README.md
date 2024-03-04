@@ -3,6 +3,7 @@
 A fully responsive news app which displays articles and associated comments.
 
 Access Newsie [here](https://newsie-app.netlify.app/) ⭐
+NOTE: The server may take a few minutes to load at first
 
 
 ## Features
