@@ -82,7 +82,7 @@ return (
 <img src={currentArticle.article_img_url} width = "100%" alt="related article image"></img>
     <article>
         <div id = "articleCounts">
-            <span>{currentVotes} votes </span> <span><Link to="#comments">{currentArticle.comment_count} comments </Link></span>
+            <span>{currentVotes} votes </span> <span><a href="#comments">{currentArticle.comment_count} comments </a></span>
         </div>
         
         <h2>{currentArticle.title}</h2>
