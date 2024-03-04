@@ -18,7 +18,6 @@ export default function Comments(props) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentInput, setCurrentInput] = useState();
-  const [newComments, setNewComments] = useState([]);
   const [postCommentError, setPostCommentError] = useState(null);
   const [isPosting, setIsPosting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -50,6 +49,9 @@ export default function Comments(props) {
         body: commentToSubmit,
         created_at: 'now',
         votes: 0,
+        comment_id: null,
+        // must add comment_id to allow deletion without refreshing page
+        // consider changing backend to return comment obj
       };
       setComments((otherComments) => {
         return [newCommentsObj, ...otherComments];
@@ -62,8 +64,12 @@ export default function Comments(props) {
         .then((commentData) => {
           setPostCommentError(null);
           setCurrentInput("");
+          setComments((otherComments) => {
+            let updatedNewComment = {...otherComments[0]}
+            updatedNewComment.comment_id = commentData.comment_id
+            return [updatedNewComment, ...otherComments.slice(1, otherComments.length)];
+          })
           setIsPosting(false);
-          console.log(commentData)
         })
         .catch((errorMsg) => {
           setPostCommentError(errorMsg);
@@ -118,16 +124,6 @@ export default function Comments(props) {
           </Button>
         </form>
       </section>
-      {/* {newComments.length !== 0
-        ? newComments.map((newComment, index) => {
-            return (
-              <div className="comment" key={index}>
-                <span> {newComment.username} | posted now</span>
-                <p>{newComment.body}</p>
-              </div>
-            );
-          })
-        : null} */}
       {comments.length === 0 || isLoading ? (
         <div className="comment">
           <span>{isLoading ? "Loading comments..." : "No comments"}</span>
