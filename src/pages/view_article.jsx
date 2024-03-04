@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+
 import { getArticleById, patchVotesOnArticleById } from '../utils/api';
 
 import Comments from '../components/Comments';
@@ -77,37 +78,37 @@ return (
         { error.apiError || isLoading ? (
             error.apiError ? <Error error={error.apiError}/> : <p>Loading article ... </p>
          ) : (
-<>
-    <main id="fullArticle">
-        <img src={currentArticle.article_img_url} width = "100%"></img>
+<main id="fullArticle">
+<img src={currentArticle.article_img_url} width = "100%" alt="related article image"></img>
+    <article>
         <div id = "articleCounts">
-            <span>{currentVotes} votes </span> <span>{currentArticle.comment_count} comments </span>
+            <span>{currentVotes} votes </span> <span><Link to="#comments">{currentArticle.comment_count} comments </Link></span>
         </div>
         
         <h2>{currentArticle.title}</h2>
 
         <IconButton aria-label="upvote article" onClick = {()=>{
             handleVote(1)
-        }} disabled = {isDownVoted} className = "voteBtn">
-        {isUpVoted?<FontAwesomeIcon icon={solidThumbsUp} /> :  <FontAwesomeIcon icon={outlineThumbsUp} /> }
+        }} disabled = {isDownVoted} >
+        <FontAwesomeIcon className="voteBtn" icon={isUpVoted? solidThumbsUp : outlineThumbsUp}/> 
       </IconButton>
       <IconButton aria-label="downvote article" onClick = {()=>{
             handleVote(-1)
         }} disabled = {isUpVoted}>
-        {isDownVoted ? <FontAwesomeIcon icon={solidThumbsDown} /> : <FontAwesomeIcon icon={outlineThumbsDown} /> }
+        <FontAwesomeIcon className = "voteBtn" icon={isDownVoted? solidThumbsDown : outlineThumbsDown}/> 
       </IconButton>
       
       {error.voteError ? <p>{error.voteError.msg}</p>: null}
       
         <h4 id = "articleTopic">{currentArticle.topic}</h4>
         <h3>by {currentArticle.author}</h3>
-        <h5>{currentArticle.created_at}</h5>
+        <h5 className="timestamp">{currentArticle.created_at}</h5>
         <p>{currentArticle.body}</p>
-    </main>
+    </article>
     <Comments article_id={article_id}/>
     <Stack direction="row" spacing={2}>
-      <Button variant="outlined" onClick = {scrollToTop}>Top</Button>
-    </Stack></>
+      <Button variant="outlined" onClick = {scrollToTop} color='purple'>Top</Button>
+    </Stack></main>
         )} </>
     )
 }

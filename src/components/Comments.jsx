@@ -42,7 +42,7 @@ export default function Comments(props) {
     setPostCommentError(null);
     const commentToSubmit = currentInput;
     if (!commentToSubmit) {
-      setPostCommentError("Comment must be at least 1 character long");
+      setPostCommentError("Comments must contain at least one character");
       setIsPosting(false);
     } else {
       const newCommentsObj = {
@@ -85,7 +85,7 @@ export default function Comments(props) {
   }
 
   return (
-    <>
+    <section id="comments">
       <section id="postCommentContainer">
         <form onSubmit={handleSubmit} className="commentForm">
           <Stack direction="row" spacing={2}>
@@ -102,8 +102,9 @@ export default function Comments(props) {
               }}
             />
           </Stack>
-          {postCommentError ? <p>{postCommentError}</p> : null}
+          {postCommentError ? <p className="formError">{postCommentError}</p> : null}
           <Button
+          color = "purple"
             variant="contained"
             id="postCommentBtn"
             type="submit"
@@ -137,14 +138,13 @@ export default function Comments(props) {
                   {comment.author === currentUser.username ? (
                     <IconButton
                       aria-label="delete comment"
-                      className="deleteBtn"
                       disabled = {isDeleting}
                       onClick = {()=>{
                         handleDelete(comment.comment_id)
                         
                       }}
                     >
-                      <DeleteIcon />
+                      <DeleteIcon className="deleteBtn"/>
                     </IconButton>
                   ) : null}
                 </CommentCard>
@@ -154,6 +154,6 @@ export default function Comments(props) {
           })}
         </section>
       )}
-    </>
+    </section>
   );
 }

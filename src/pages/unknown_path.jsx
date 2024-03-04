@@ -10,10 +10,10 @@ export default function Unknown_Path(props){
     const [error, setError] = useState({msg: 'unknown path'})
 
     return (
-        <>
+        <section id="unknownPath">
         <Topics setArticles={setArticles} setIsLoadingArticles={setIsLoadingArticles}/>
         <Error error={error}/>
-        </>
+        </section>
 
     )
 }

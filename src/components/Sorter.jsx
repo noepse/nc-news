@@ -64,8 +64,8 @@ export default function Sorter(props) {
   const options = ["Date added", "Comments", "Votes"];
 
   return (
-    <div>
-      <List component="nav" className="sortBtn">
+    <div class="sorter">
+      <List component="nav" >
         <ListItemButton
           id="sort-button"
           aria-haspopup="listbox"
@@ -97,7 +97,6 @@ export default function Sorter(props) {
         ))}
       </Menu>
       {isAscending ? (
-        <>
         <IconButton
           aria-label="descending"
           onClick={() => {
@@ -106,7 +105,7 @@ export default function Sorter(props) {
         >
           <KeyboardArrowDownIcon />
         </IconButton>
-      </>) : (
+      ) : (
         <>
         <IconButton
           aria-label="ascending"

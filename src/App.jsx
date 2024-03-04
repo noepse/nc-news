@@ -1,6 +1,9 @@
 import { useState, useEffect, useContext } from 'react'
 import { Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material';
+
 import './App.css'
+import theme from './themes/theme';
 import Header from './components/Header'
 import NavBar from './components/NavBar'
 import Home from './pages/home';
@@ -23,17 +26,17 @@ function App() {
   }, [])
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
     <Header />
     <NavBar />
     <Routes>
         <Route path="/" element={<Home />} setCurrentArticle={setCurrentArticle} />
-        <Route path="/articles/:topic_name"element={<Home />} setCurrentArticle={setCurrentArticle} />
+        <Route path="/articles/:topic_name" element={<Home />} setCurrentArticle={setCurrentArticle} />
         <Route path="/submit" element={<Submit_Article />} />
         <Route path="/:article_id" element={<View_Article />} />
         <Route path="*" element={<Unknown_Path />} />
       </Routes>
-    </>
+    </ThemeProvider>
   )
 }
 

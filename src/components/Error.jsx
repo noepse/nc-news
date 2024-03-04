@@ -5,7 +5,7 @@ import AlertTitle from '@mui/material/AlertTitle';
 export default function Error(props){
     const {error} = props
 return (
-<Alert severity="error">
+<Alert severity="error" className="error">
   <AlertTitle>Error</AlertTitle>
   {error.msg}
 </Alert>
