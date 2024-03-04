@@ -89,7 +89,7 @@ export default function Comments(props) {
       <section id="postCommentContainer">
         <form onSubmit={handleSubmit} className="commentForm">
           <Stack direction="row" spacing={2}>
-            <Avatar alt="Logged in user avatar" src={currentUser.Avatar} />
+            <Avatar alt="Logged in user avatar" src={currentUser.avatar_url} />
             <TextField
               className="commentInput"
               id="outlined-multiline-flexible"
