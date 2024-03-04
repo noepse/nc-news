@@ -18,7 +18,6 @@ export default function Comments(props) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentInput, setCurrentInput] = useState();
-  const [newComments, setNewComments] = useState([]);
   const [postCommentError, setPostCommentError] = useState(null);
   const [isPosting, setIsPosting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -46,11 +45,16 @@ export default function Comments(props) {
       setIsPosting(false);
     } else {
       const newCommentsObj = {
-        username: currentUser.username,
+        author: currentUser.username,
         body: commentToSubmit,
+        created_at: 'now',
+        votes: 0,
+        comment_id: null,
+        // must add comment_id to allow deletion without refreshing page
+        // consider changing backend to return comment obj
       };
-      setNewComments((otherNewComments) => {
-        return [newCommentsObj, ...otherNewComments];
+      setComments((otherComments) => {
+        return [newCommentsObj, ...otherComments];
       });
       postCommentOnArticleById(
         article_id,
@@ -60,6 +64,11 @@ export default function Comments(props) {
         .then((commentData) => {
           setPostCommentError(null);
           setCurrentInput("");
+          setComments((otherComments) => {
+            let updatedNewComment = {...otherComments[0]}
+            updatedNewComment.comment_id = commentData.comment_id
+            return [updatedNewComment, ...otherComments.slice(1, otherComments.length)];
+          })
           setIsPosting(false);
         })
         .catch((errorMsg) => {
@@ -115,16 +124,6 @@ export default function Comments(props) {
           </Button>
         </form>
       </section>
-      {newComments.length !== 0
-        ? newComments.map((newComment, index) => {
-            return (
-              <div className="comment" key={index}>
-                <span> {newComment.username} | posted now</span>
-                <p>{newComment.body}</p>
-              </div>
-            );
-          })
-        : null}
       {comments.length === 0 || isLoading ? (
         <div className="comment">
           <span>{isLoading ? "Loading comments..." : "No comments"}</span>
@@ -138,7 +137,7 @@ export default function Comments(props) {
                   {comment.author === currentUser.username ? (
                     <IconButton
                       aria-label="delete comment"
-                      disabled = {isDeleting}
+                      disabled = {isDeleting || isPosting}
                       onClick = {()=>{
                         handleDelete(comment.comment_id)
                         

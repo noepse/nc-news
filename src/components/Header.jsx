@@ -7,11 +7,12 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 
 export default function Header() {
+  
   const { currentUser } = useContext(CurrentUserContext);
-  console.log(currentUser);
+
   return (
     <header>
-      <div class="headerContainer">
+      <div className="headerContainer">
         <h1>
           <Link to="/">newsie</Link>
         </h1>
