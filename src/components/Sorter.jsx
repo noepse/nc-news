@@ -64,7 +64,7 @@ export default function Sorter(props) {
   const options = ["Date added", "Comments", "Votes"];
 
   return (
-    <div class="sorter">
+    <div className="sorter">
       <List component="nav" >
         <ListItemButton
           id="sort-button"
