@@ -42,7 +42,7 @@ export default function View_Article(){
             setError({apiError: error})
             setIsLoading(false);
         })
-    }, [])
+    }, [article_id])
 
     function scrollToTop(){
         document.body.scrollTop = 0; // For Safari
