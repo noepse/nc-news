@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { getArticleById, patchVotesOnArticleById } from '../utils/api';
+
+import { CurrentUserContext } from '../contexts/CurrentUser';
 
 import Comments from '../components/Comments';
 import Error from '../components/Error';
@@ -23,6 +25,8 @@ export default function View_Article(){
     const [isUpVoted, setIsUpVoted] = useState(false);
     const [isDownVoted, setIsDownVoted] = useState(false);
     const [isVoted, setIsVoted] = useState(false)
+
+    const {currentUser} = useContext(CurrentUserContext)
 
     const [error, setError] = useState({apiError: null, voteError: null})
 
@@ -73,6 +77,10 @@ export default function View_Article(){
         })
     }
 
+    function handleDelete(){
+        
+    }
+
 return (
     <>
         { error.apiError || isLoading ? (
@@ -80,9 +88,10 @@ return (
          ) : (
 <main id="fullArticle">
 <img src={currentArticle.article_img_url} width = "100%" alt="related article image"></img>
-    <article>
+    <article style={{width: '100%'}}>
         <div id = "articleCounts">
             <span>{currentVotes} votes </span> <span><a href="#comments">{currentArticle.comment_count} comments </a></span>
+            {currentUser.username === currentArticle.author ? <Button color="error" onClick={handleDelete}>Delete</Button> : null}
         </div>
         
         <h2>{currentArticle.title}</h2>

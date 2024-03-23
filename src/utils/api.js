@@ -118,8 +118,7 @@ export const getTopics = ()=>{
     })
 }
 
-export const postArticle = (article) =>{
-    console.log(article)
+export const postArticle = (article) => {
     return api
     .post(`/articles` , article)
     .then((response)=>{
@@ -129,3 +128,8 @@ export const postArticle = (article) =>{
         return Promise.reject(err.response.data)
     })
 }
+
+// export const deleteArticle = (articleId) = {
+//     return api
+//     .delete(`/{articleId}`)
+// }
