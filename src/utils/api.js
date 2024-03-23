@@ -117,3 +117,15 @@ export const getTopics = ()=>{
         console.log(err)
     })
 }
+
+export const postArticle = (article) =>{
+    console.log(article)
+    return api
+    .post(`/articles` , article)
+    .then((response)=>{
+        return response.data
+    })
+    .catch((err)=>{
+        return Promise.reject(err.response.data)
+    })
+}
