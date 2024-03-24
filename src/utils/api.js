@@ -48,6 +48,17 @@ export const getArticleById = (articleId) => {
     })
 }
 
+export const deleteArticleById = (articleId) => {
+    return api
+    .delete(`/articles/${articleId}`)
+    .then((response) => {
+        return response
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
+
 export const getCommentsbyId = (articleId) =>{
     return api
     .get(`/articles/${articleId}/comments`)
@@ -128,8 +139,3 @@ export const postArticle = (article) => {
         return Promise.reject(err.response.data)
     })
 }
-
-// export const deleteArticle = (articleId) = {
-//     return api
-//     .delete(`/{articleId}`)
-// }
