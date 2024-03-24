@@ -36,17 +36,17 @@ h1 {
 }
 
 header{
-  width: 100%
+  width: 100%;
+  border-bottom: 2px solid rgb(208, 208, 208)
 }
 
 .headerContainer{
-  padding: 1em;
+  padding: 1em 2em;
   width: 100%;
   color: #111111;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid rgb(208, 208, 208)
 
 }
 
@@ -54,6 +54,10 @@ header{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.highlightText{
+  font-style: italic;
 }
 
 a {
@@ -226,6 +230,27 @@ article button{
 .commentHeader span{
   color: rgb(80, 80, 80);
 }
+
+#submit
+{
+  max-width: 600px;
+  padding: 2em;
+  width: 100%;
+}
+
+#submitBtn{
+  margin-top: 1em;
+}
+
+#formHeader{
+  margin-top: -1em;
+  margin-bottom: 1em;
+}
+
+#imagePreview{
+  margin-bottom: 1em;
+}
+
 
 .error{
   width: 80%;
