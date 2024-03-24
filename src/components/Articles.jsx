@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { getArticles } from "../utils/api.js";
 import { useParams, useSearchParams } from "react-router-dom";
 
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 export default function Articles(props) {
   const {
@@ -21,19 +21,22 @@ export default function Articles(props) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortByQuery = searchParams.get("sort_by");
-  const orderQuery = searchParams.get("order"); 
-  const pageQuery = searchParams.get("p"); 
+  const orderQuery = searchParams.get("order");
+  const pageQuery = searchParams.get("p");
 
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setIsLoadingArticles(true);
 
-    getArticles(topic_name, { sort_by: sortByQuery, order: orderQuery, p: pageQuery })
-    .then(
-      (articlesData) => {
+    getArticles(topic_name, {
+      sort_by: sortByQuery,
+      order: orderQuery,
+      p: pageQuery,
+    })
+      .then((articlesData) => {
         setIsLoadingArticles(false);
-        setError(false)
+        setError(false);
 
         if (sortByQuery === "comment_count" || sortByQuery === "votes") {
           setArticles(
@@ -51,15 +54,32 @@ export default function Articles(props) {
         } else {
           setArticles(articlesData);
         }
-      }
-    ).catch((error)=>{
-        setIsLoadingArticles(false)
-        setError(error)
-    })
+      })
+      .catch((error) => {
+        setIsLoadingArticles(false);
+        setError(error);
+      });
   }, [topic_name, searchParams]);
 
-  function handleChange(event){
-setSearchParams({ p: event.target.innerText });
+  function handleChange(event) {
+
+    if (event.target.getAttribute("data-testid") === "NavigateNextIcon") {
+      if (pageQuery) {
+        console.log(Number(pageQuery) + 1)
+        setSearchParams({ p: Number(pageQuery) + 1 });
+      } else setSearchParams({ p: 2 });
+      return
+    }
+
+    if (event.target.getAttribute("data-testid") === "NavigateBeforeIcon") {
+      if (pageQuery) {
+        setSearchParams({ p: Number(pageQuery) - 1 });
+      } else setSearchParams({ p: 1 });
+      return
+    } 
+    else if (event.target.innerText){
+      setSearchParams({ p: event.target.innerText })
+    }
   }
 
   return (
@@ -76,21 +96,33 @@ setSearchParams({ p: event.target.innerText });
         ) : null}
       </div>
       {error || isLoadingArticles ? (
-        error ? <Error error={error}/> : <p>Loading articles...</p>
-    ) : (
-        <><main id="articles">
+        error ? (
+          <Error error={error} />
+        ) : (
+          <p>Loading articles...</p>
+        )
+      ) : (
+        <>
+          <main id="articles">
             {articles.map((article) => {
               return (
                 <ArticleCard
                   key={article.article_id}
                   article={article}
-                  setCurrentArticle={setCurrentArticle} />
+                  setCurrentArticle={setCurrentArticle}
+                />
               );
             })}
           </main>
           <Stack spacing={1}>
-              <Pagination count={2} color="secondary" page={pageQuery ? Number(pageQuery) : 1} onChange={handleChange} />
-            </Stack></>
+            <Pagination
+              count={2}
+              color="secondary"
+              page={pageQuery ? Number(pageQuery) : 1}
+              onChange={handleChange}
+            />
+          </Stack>
+        </>
       )}
     </>
   );
