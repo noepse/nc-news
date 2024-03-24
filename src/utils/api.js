@@ -137,7 +137,7 @@ export const postArticle = (article) => {
     return api
     .post(`/articles` , article)
     .then((response)=>{
-        return response.data
+        return response.data.article
     })
     .catch((err)=>{
         return Promise.reject(err.response.data)
