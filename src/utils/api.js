@@ -52,6 +52,17 @@ export const getArticleById = (articleId) => {
     })
 }
 
+export const deleteArticleById = (articleId) => {
+    return api
+    .delete(`/articles/${articleId}`)
+    .then((response) => {
+        return response
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
+
 export const getCommentsbyId = (articleId) =>{
     return api
     .get(`/articles/${articleId}/comments`)
@@ -122,8 +133,7 @@ export const getTopics = ()=>{
     })
 }
 
-export const postArticle = (article) =>{
-    console.log(article)
+export const postArticle = (article) => {
     return api
     .post(`/articles` , article)
     .then((response)=>{
