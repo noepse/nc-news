@@ -99,7 +99,7 @@ handleSubmit()
                                       
                                           setTitle(event.target.value)
                                       }}/>
-<AutosizeTextArea onChange={(event)=>{
+<AutosizeTextArea body={body} onChange={(event)=>{
     setBody(event.target.value)}}/>
 <Button id="submitBtn" variant="contained" disabled={isPosting} type="submit">Submit</Button>
 </Box>
