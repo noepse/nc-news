@@ -1,4 +1,5 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FormControl } from '@mui/material';
 
 import Box from '@mui/material/Box';
@@ -14,6 +15,8 @@ import { CurrentUserContext } from '../contexts/CurrentUser';
 import { getTopics, postArticle } from '../utils/api';
 
 export default function Submit_Article(){
+  const navigate = useNavigate();
+
     const [topics, setTopics] = useState([])
     const [topic, setTopic] = useState('')
     const [imageUrl, setImageUrl] = useState('')
@@ -52,6 +55,7 @@ export default function Submit_Article(){
           topic,
           article_img_url: imageUrl
           }).then((articleData)=>{
+            console.log(articleData)
             navigate(`/${articleData.article_id}`);
             setIsPosting(false)
         }).catch((error)=>{
@@ -66,7 +70,10 @@ setIsPosting(false)
             <p>as {currentUser.username ? currentUser.username : '...'}</p>
             {error? <Error error = {error}></Error> : null}
                           {regex.test(imageUrl)? <img src={imageUrl} width="150px"></img> : 'no image' }
-            <Box component='form' onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', gap: '0.5em'}}>
+            <Box component='form' onSubmit = {(event)=>{
+event.preventDefault()
+handleSubmit()
+            }} style={{display: 'flex', flexDirection: 'column', gap: '0.5em'}}>
                                       <TextField id="image" label="Image URL" variant="outlined" value={imageUrl} onChange={(event)=>{
                                           setImageUrl(event.target.value)
                                       }}/>
