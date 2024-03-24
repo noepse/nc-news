@@ -16,11 +16,11 @@ export const getArticles = (topic, query)=>{
         queryStr+=`sort_by=${query.sort_by}&`
     }
     if (query && query.order){
-        queryStr += `order_by=${query.order}`
+        queryStr += `order_by=${query.order}&`
     }
 
     if (query && query.p){
-        queryStr += `p=${query.p}`
+        queryStr += `p=${query.p}&`
     }
 
     return api
