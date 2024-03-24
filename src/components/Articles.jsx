@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { getArticles } from "../utils/api.js";
 import { useParams, useSearchParams } from "react-router-dom";
 
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+
 export default function Articles(props) {
   const {
     setCurrentArticle,
@@ -19,13 +22,14 @@ export default function Articles(props) {
 
   const sortByQuery = searchParams.get("sort_by");
   const orderQuery = searchParams.get("order"); 
+  const pageQuery = searchParams.get("p"); 
 
   const [error, setError] = useState(false)
 
   useEffect(() => {
     setIsLoadingArticles(true);
 
-    getArticles(topic_name, { sort_by: sortByQuery, order: orderQuery })
+    getArticles(topic_name, { sort_by: sortByQuery, order: orderQuery, p: pageQuery })
     .then(
       (articlesData) => {
         setIsLoadingArticles(false);
@@ -53,6 +57,11 @@ export default function Articles(props) {
         setError(error)
     })
   }, [topic_name, searchParams]);
+
+  function handleChange(event){
+setSearchParams({ p: event.target.innerText });
+  }
+
   return (
     <>
       <div className="sortHeader">
@@ -69,17 +78,19 @@ export default function Articles(props) {
       {error || isLoadingArticles ? (
         error ? <Error error={error}/> : <p>Loading articles...</p>
     ) : (
-        <main id="articles">
-          {articles.map((article) => {
-            return (
-              <ArticleCard
-                key={article.article_id}
-                article={article}
-                setCurrentArticle={setCurrentArticle}
-              />
-            );
-          })}
-        </main>
+        <><main id="articles">
+            {articles.map((article) => {
+              return (
+                <ArticleCard
+                  key={article.article_id}
+                  article={article}
+                  setCurrentArticle={setCurrentArticle} />
+              );
+            })}
+          </main>
+          <Stack spacing={1}>
+              <Pagination count={2} color="secondary" page={pageQuery ? Number(pageQuery) : 1} onChange={handleChange} />
+            </Stack></>
       )}
     </>
   );

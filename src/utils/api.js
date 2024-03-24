@@ -19,6 +19,10 @@ export const getArticles = (topic, query)=>{
         queryStr += `order_by=${query.order}`
     }
 
+    if (query && query.p){
+        queryStr += `p=${query.p}`
+    }
+
     return api
     .get(`/articles/?${queryStr}`, 
     // {
