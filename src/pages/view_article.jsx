@@ -124,7 +124,7 @@ return (
             {currentUser.username === currentArticle.author ? <Button color="error" onClick={openPopUp}>Delete</Button> : null}
         </div>
         
-        <h2>{currentArticle.title}</h2>
+        <h2 className="styledText">{currentArticle.title}</h2>
 
         <IconButton aria-label="upvote article" onClick = {()=>{
             handleVote(1)
@@ -140,7 +140,7 @@ return (
       {error.voteError ? <p>{error.voteError.msg}</p>: null}
       
         <h4 id = "articleTopic">{currentArticle.topic}</h4>
-        <h3>by {currentArticle.author}</h3>
+        <h3 className="styledText">by {currentArticle.author}</h3>
         <h5 className="timestamp">{currentArticle.created_at}</h5>
         <p>{currentArticle.body}</p>
     </article>

@@ -6,6 +6,7 @@ import { CurrentUserContext } from "../contexts/CurrentUser";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
+import { Tooltip, Divider } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
@@ -95,14 +96,17 @@ export default function Comments(props) {
 
   return (
     <section id="comments">
+          <Divider textAlign="left" style={{width: '100%'}}> 
+                     <h3 className="styledText" style={{display: 'inline'}}> Comments </h3> ({comments.length}) </Divider>
       <section id="postCommentContainer">
         <form onSubmit={handleSubmit} className="commentForm">
           <Stack direction="row" spacing={2}>
+          <Tooltip title={`Comment as ${currentUser.username}`} arrow placement="top-start">
             <Avatar alt="Logged in user avatar" src={currentUser.avatar_url} />
-            <TextField
+          </Tooltip>            <TextField
               className="commentInput"
               id="outlined-multiline-flexible"
-              label="Enter a comment"
+              label="Share your thoughts"
               multiline
               maxRows={4}
               value={currentInput}
@@ -120,7 +124,7 @@ export default function Comments(props) {
             onClick={handleSubmit}
             disabled={isPosting}
           >
-            Post comment
+            Submit
           </Button>
         </form>
       </section>
