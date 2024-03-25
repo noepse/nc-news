@@ -90,6 +90,7 @@ a:hover {
 }
 
 article h2{
+  margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
 
@@ -184,6 +185,7 @@ article button{
 }
 #comments
 {
+  margin-top: 1em;
   padding: 1em;
   max-width: 768px;
 }
