@@ -6,6 +6,7 @@ import { CurrentUserContext } from "../contexts/CurrentUser";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
+import { Tooltip } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
@@ -98,8 +99,9 @@ export default function Comments(props) {
       <section id="postCommentContainer">
         <form onSubmit={handleSubmit} className="commentForm">
           <Stack direction="row" spacing={2}>
+          <Tooltip title={currentUser.username} arrow placement="top-start">
             <Avatar alt="Logged in user avatar" src={currentUser.avatar_url} />
-            <TextField
+          </Tooltip>            <TextField
               className="commentInput"
               id="outlined-multiline-flexible"
               label="Enter a comment"
