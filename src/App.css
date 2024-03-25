@@ -135,6 +135,10 @@ h1{
   letter-spacing: -2px;
 }
 
+.styledText{
+  letter-spacing: -1px;
+}
+
 .timestamp{
   margin-top: 1em;
   color :rgb(80, 80, 80);
