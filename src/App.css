@@ -70,17 +70,15 @@ a:hover {
 }
 
 #navbar{
-  margin: 2em 0em 1em 0;
+  margin: 2em 0em 2em 0;
   display: flex;
 }
 
 #topics{
-  padding: 1em;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 1em;
   gap: 1em;
 }
 
@@ -105,11 +103,13 @@ article p{
   flex-direction: column;
   gap: 0.5em;
   align-items: center;
-  padding: 1em;
+  padding: 0em 1em;
+  margin-bottom: 1em;
 }
 
 .sortHeader{
-  padding: 0em 2em;
+  margin-top: 1em;
+  height: 100px;
   width: 100%;
 display: flex;
 justify-content: center;

@@ -101,7 +101,7 @@ export default function Comments(props) {
       <section id="postCommentContainer">
         <form onSubmit={handleSubmit} className="commentForm">
           <Stack direction="row" spacing={2}>
-          <Tooltip title={currentUser.username} arrow placement="top-start">
+          <Tooltip title={`Comment as ${currentUser.username}`} arrow placement="top-start">
             <Avatar alt="Logged in user avatar" src={currentUser.avatar_url} />
           </Tooltip>            <TextField
               className="commentInput"
