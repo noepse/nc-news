@@ -17,7 +17,7 @@ export default function Header() {
           <Link to="/">newsie</Link>
         </h1>
         <div className="userContainer">
-          <Tooltip title={`${currentUser.username}`} arrow placement="bottom-end">
+          <Tooltip title={currentUser ? currentUser.username : null} arrow placement="bottom-end">
             <Avatar alt="Logged in user avatar" src={currentUser.avatar_url} />
           </Tooltip>
         </div>
