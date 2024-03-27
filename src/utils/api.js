@@ -85,6 +85,17 @@ export const patchVotesOnArticleById = (articleId, votes) => {
     })
 }
 
+export const patchVotesOnCommentById = (commentId, votes) => {
+    return api
+    .patch(`/comments/${commentId}`, {inc_votes: votes})
+    .then((response) => {
+        return response.data.comment
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
+
 export const postCommentOnArticleById = (articleId, user, comment)=>{
     const requestBody = {
         username: user,
