@@ -7,7 +7,7 @@ import { faThumbsUp as outlineThumbsUp, faThumbsDown as outlineThumbsDown } from
 import { patchVotesOnCommentById } from '../utils/api';
 
 export default function CommentCard(props){
-    const {comment} = props
+    const {comment, isPosting, isDeleting} = props
 
     const [currentVotes, setCurrentVotes] = useState(comment.votes)
     const [isUpVoted, setIsUpVoted] = useState(false);
@@ -55,16 +55,16 @@ export default function CommentCard(props){
         </div>
         <p>{comment.body}</p>
         <div>
-        <IconButton aria-label="upvote article" onClick = {()=>{
+        <IconButton aria-label="upvote article" disabled={isPosting || isDeleting} onClick = {()=>{
             handleVote('upvote')
         }} >
-        <FontAwesomeIcon className="voteBtn" icon={isUpVoted? solidThumbsUp : outlineThumbsUp} size='sm'/> 
+        <FontAwesomeIcon className="voteBtn" icon={isUpVoted? solidThumbsUp : outlineThumbsUp} size='sm' /> 
       </IconButton>
         <span>{currentVotes} votes</span>
-        <IconButton aria-label="downvote article" onClick = {(event)=>{
+        <IconButton aria-label="downvote article" disabled={isPosting || isDeleting} onClick = {(event)=>{
             handleVote('downvote')
         }} >
-        <FontAwesomeIcon className = "voteBtn" icon={isDownVoted? solidThumbsDown : outlineThumbsDown} size='sm'/> 
+        <FontAwesomeIcon className = "voteBtn" icon={isDownVoted? solidThumbsDown : outlineThumbsDown} size='sm' /> 
       </IconButton>
       </div>
         </div>

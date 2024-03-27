@@ -137,7 +137,7 @@ export default function Comments(props) {
           {comments.map((comment) => {
             return (
               <div key = {comment.comment_id}>
-                <CommentCard comment={comment}>
+                <CommentCard comment={comment} isPosting={isPosting} isDeleting={isDeleting}>
                   {comment.author === currentUser.username ? (
                     <IconButton
                       aria-label="delete comment"
