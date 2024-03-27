@@ -28,7 +28,6 @@ export default function View_Article(){
     const [isDeleting, setIsDeleting] = useState(false)
     const [isUpVoted, setIsUpVoted] = useState(false);
     const [isDownVoted, setIsDownVoted] = useState(false);
-    const [isVoted, setIsVoted] = useState(false)
 
     const [openDialog, setOpenDialog] = useState(false);
     const [openBackdrop, setOpenBackdrop] = useState(false)
@@ -60,19 +59,32 @@ export default function View_Article(){
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
 
-    function handleVote(votes){
-        if (votes === 1){
-            setIsUpVoted(!isUpVoted)
+    function handleVote(vote){
+        let votes = 0
+        if (vote === 'upvote'){ 
+            votes = 1
+            if (isUpVoted){ 
+                votes = -1 
+            }
+            if (isDownVoted){
+                votes = 2
+            }
+            setIsUpVoted(!isUpVoted) 
+            setIsDownVoted(false) 
         }
-        if (votes === -1){
+        if (vote === 'downvote'){
+            votes = -1
+            if (isDownVoted){
+                votes = 1 
+            }
+            if (isUpVoted){
+                votes = -2
+            }
             setIsDownVoted(!isDownVoted)
+            setIsUpVoted(false)
         }
 
-        if(isVoted){
-            votes = -votes
-        }
         setCurrentVotes(currentVotes + votes)
-        setIsVoted(!isVoted)
 
         patchVotesOnArticleById(article_id, votes)
         .then((articleData)=>{
@@ -120,22 +132,16 @@ return (
 <img src={currentArticle.article_img_url} width = "100%" alt="related article image"></img>
     <article style={{width: '100%'}}>
         <div id = "articleCounts">
-            <span>{currentVotes} votes </span> <span><a href="#comments">{currentArticle.comment_count} comments </a></span>
+        
+            <span>{currentVotes} votes </span> 
+      <span><a href="#comments">{currentArticle.comment_count} comments </a></span>
             {currentUser.username === currentArticle.author ? <Button color="error" onClick={openPopUp}>Delete</Button> : null}
         </div>
         
         <h2 className="styledText">{currentArticle.title}</h2>
 
-        <IconButton aria-label="upvote article" onClick = {()=>{
-            handleVote(1)
-        }} disabled = {isDownVoted} >
-        <FontAwesomeIcon className="voteBtn" icon={isUpVoted? solidThumbsUp : outlineThumbsUp}/> 
-      </IconButton>
-      <IconButton aria-label="downvote article" onClick = {()=>{
-            handleVote(-1)
-        }} disabled = {isUpVoted}>
-        <FontAwesomeIcon className = "voteBtn" icon={isDownVoted? solidThumbsDown : outlineThumbsDown}/> 
-      </IconButton>
+        
+      
       
       {error.voteError ? <p>{error.voteError.msg}</p>: null}
       
@@ -144,6 +150,18 @@ return (
         <h5 className="timestamp">{currentArticle.created_at}</h5>
         <p>{currentArticle.body}</p>
     </article>
+    <Stack direction="row" spacing={1}>
+    <IconButton aria-label="upvote article" onClick = {()=>{
+            handleVote('upvote')
+        }} >
+        <FontAwesomeIcon className="voteBtn" icon={isUpVoted? solidThumbsUp : outlineThumbsUp} size='sm'/> 
+      </IconButton>
+    <IconButton aria-label="downvote article" onClick = {(event)=>{
+            handleVote('downvote')
+        }} >
+        <FontAwesomeIcon className = "voteBtn" icon={isDownVoted? solidThumbsDown : outlineThumbsDown} size='sm'/> 
+      </IconButton>
+      </Stack>
     <Comments article_id={article_id}/>
     <Stack direction="row" spacing={2}>
       <Button variant="outlined" onClick = {scrollToTop} color='purple'>Top</Button>
