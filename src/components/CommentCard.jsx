@@ -55,7 +55,7 @@ export default function CommentCard(props){
         {props.children}
         </div>
         <p>{comment.body}</p>
-        <Stack direction={'row'} spacing={1} alignContent={'center'} alignItems={'center'} position={'center'}>
+        <Stack direction={'row'} spacing={1} alignItems={'center'} >
         <IconButton aria-label="upvote article" disabled={isPosting || isDeleting} onClick = {()=>{
             handleVote('upvote')
         }} >
