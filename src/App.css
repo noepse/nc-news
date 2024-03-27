@@ -211,11 +211,6 @@ article button{
   margin: 1em 0em;
 }
 
-.avatar{
-  width: 10%;
-  display: inline-block;
-}
-
 .comment{
   padding: 1em;
   display: flex;

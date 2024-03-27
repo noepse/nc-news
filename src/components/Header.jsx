@@ -32,7 +32,7 @@ export default function Header() {
         </h1>
         <div className="userContainer">
           <Tooltip title={currentUser ? currentUser.username : null} arrow placement="bottom-end">
-            <Avatar alt="Logged in user avatar" src={currentUser.avatar_url} onClick={handleClickOpen}/>
+            <Avatar alt="Logged in user avatar" src={currentUser.avatar_url} onClick={handleClickOpen} id="headerAvatar" style={{cursor: 'pointer'}}/>
           </Tooltip>
         </div>
       </div>

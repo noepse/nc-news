@@ -57,7 +57,7 @@ export default function ChangeUser(props) {
               </ListItemAvatar>
               <ListItemText primary={user.name} secondary={user.username} />
               {user.username === currentUser.username?  <ListItemAvatar>
-                <CheckIcon style ={{marginLeft: '1em'}}/>
+                <CheckIcon style ={{marginLeft: '1em'}} color="primary"/>
             </ListItemAvatar> : null}
              
             </ListItemButton>
