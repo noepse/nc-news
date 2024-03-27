@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp as solidThumbsUp, faThumbsDown as solidThumbsDown } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp as outlineThumbsUp, faThumbsDown as outlineThumbsDown } from '@fortawesome/free-regular-svg-icons'
+import { Stack } from '@mui/material';
 
 import { patchVotesOnCommentById } from '../utils/api';
 
@@ -54,19 +55,19 @@ export default function CommentCard(props){
         {props.children}
         </div>
         <p>{comment.body}</p>
-        <div>
+        <Stack direction={'row'} spacing={1} alignContent={'center'} alignItems={'center'} position={'center'}>
         <IconButton aria-label="upvote article" disabled={isPosting || isDeleting} onClick = {()=>{
             handleVote('upvote')
         }} >
-        <FontAwesomeIcon className="voteBtn" icon={isUpVoted? solidThumbsUp : outlineThumbsUp} size='sm' /> 
+        <FontAwesomeIcon className="voteBtn" icon={isUpVoted? solidThumbsUp : outlineThumbsUp} size='xs' /> 
       </IconButton>
         <span>{currentVotes} votes</span>
         <IconButton aria-label="downvote article" disabled={isPosting || isDeleting} onClick = {(event)=>{
             handleVote('downvote')
         }} >
-        <FontAwesomeIcon className = "voteBtn" icon={isDownVoted? solidThumbsDown : outlineThumbsDown} size='sm' /> 
+        <FontAwesomeIcon className = "voteBtn" icon={isDownVoted? solidThumbsDown : outlineThumbsDown} size='xs' /> 
       </IconButton>
-      </div>
+      </Stack>
         </div>
     )
 }

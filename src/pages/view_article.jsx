@@ -150,12 +150,13 @@ return (
         <h5 className="timestamp">{currentArticle.created_at}</h5>
         <p>{currentArticle.body}</p>
     </article>
-    <Stack direction="row" spacing={1}>
+    <Stack direction="row" spacing={1} alignItems={'center'}>
     <IconButton aria-label="upvote article" onClick = {()=>{
             handleVote('upvote')
         }} >
         <FontAwesomeIcon className="voteBtn" icon={isUpVoted? solidThumbsUp : outlineThumbsUp} size='sm'/> 
       </IconButton>
+      <span className='styledText'>Find this article interesting?</span>
     <IconButton aria-label="downvote article" onClick = {(event)=>{
             handleVote('downvote')
         }} >
