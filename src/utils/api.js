@@ -143,3 +143,14 @@ export const postArticle = (article) => {
         return Promise.reject(err.response.data)
     })
 }
+
+export const getUsers = ()=>{
+    return api
+    .get(`/users`)
+    .then((response) => {
+        return response.data.users
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
