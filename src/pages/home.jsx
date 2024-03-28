@@ -2,7 +2,6 @@ import Topics from '../components/Topics'
 import Articles from '../components/Articles'
 import { useState } from 'react'
 import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 import HashLoader from "react-spinners/HashLoader";
 
 export default function Home(props){

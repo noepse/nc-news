@@ -8,6 +8,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Backdrop from '@mui/material/Backdrop';
+import HashLoader from "react-spinners/HashLoader";
+
 import Error from '../components/Error';
 import AutosizeTextArea from '../components/AutosizeTextArea';
 
@@ -25,6 +28,7 @@ export default function Submit_Article(){
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
 
+    const [isLoading, setIsLoading] = useState(false)
     const [isPosting, setIsPosting] = useState(false)
     const [error, setError] = useState('')
 
@@ -33,8 +37,14 @@ export default function Submit_Article(){
     const regex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g
 
     useEffect(()=>{
-        getTopics().then((topics)=>{
+      setIsLoading(true)
+        getTopics()
+        .then((topics)=>{
             setTopics(topics)
+            setIsLoading(false)
+        })
+        .catch(()=>{
+          setIsLoading(false)
         })
     }, [])
 
@@ -66,6 +76,21 @@ setIsPosting(false)
       };
 
     return (
+      <>
+      {isLoading ? <Backdrop
+        sx={{ color: '#fff', flexDirection: 'column', gap: '1em', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isLoading}
+      > 
+        <h1>Loading form ... </h1>
+        <HashLoader
+        color={'#fff'}
+        loading={isLoading}
+        size={70}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+      </Backdrop> : null}
+
         <section id="submit">
           <div id="formHeader">
             <h2>Post an article </h2>
@@ -101,8 +126,10 @@ handleSubmit()
                                       }}/>
 <AutosizeTextArea body={body} onChange={(event)=>{
     setBody(event.target.value)}}/>
-<Button id="submitBtn" variant="contained" disabled={isPosting} type="submit">Submit</Button>
+<Button id="submitBtn" variant="contained" disabled={isPosting || isLoading} type="submit">Submit</Button>
 </Box>
             </section>
+            </>
         )
+
 }
