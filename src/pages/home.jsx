@@ -17,6 +17,7 @@ export default function Home(props){
         open={isLoadingArticles}
       > 
         <h1>Loading articles ... </h1>
+        <p>This can take up to 5 minutes.</p>
         <HashLoader
         color={'#fff'}
         loading={isLoadingArticles}
