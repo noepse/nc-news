@@ -19,7 +19,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
-const drawerWidth = 240;
+const drawerWidth = '100vw';
 
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -28,13 +28,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
+  justifyContent: 'flex-start',
 }));
 
 export default function MenuDrawer(props) {
   const theme = useTheme();
 
-  const {openMenu, setOpen} = props
+  const {open, setOpen} = props
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -45,9 +45,15 @@ export default function MenuDrawer(props) {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <>
       <CssBaseline />
-      
+      <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+          ><MenuIcon /></IconButton>
       <Drawer
         sx={{
           width: drawerWidth,
@@ -60,25 +66,15 @@ export default function MenuDrawer(props) {
         variant="persistent"
         anchor="top"
         open={open}
+        SlideProps={{easing: { enter: '0', exit: '0' }}}
       >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+        <DrawerHeader >
+          <IconButton onClick={handleDrawerClose} >
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        
         <Divider />
         <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
@@ -93,7 +89,7 @@ export default function MenuDrawer(props) {
           ))}
         </List>
       </Drawer>
-     
-    </Box>
+      </>
+
   );
 }
