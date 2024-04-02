@@ -3,6 +3,8 @@ import { useState, useContext } from "react";
 
 import { CurrentUserContext } from "../contexts/CurrentUser";
 
+import MenuDrawer from "./MenuDrawer";
+
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import * as React from 'react';
@@ -14,6 +16,8 @@ export default function Header() {
   const { currentUser } = useContext(CurrentUserContext);
 
   const [open, setOpen] = useState(false);
+
+  const [openMenu, setOpenMenu] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,6 +31,7 @@ export default function Header() {
   return (
     <><header>
       <div className="headerContainer">
+        <MenuDrawer open={openMenu} setOpen = {setOpenMenu}/>
         <h1>
           <Link to="/">newsie</Link>
         </h1>
