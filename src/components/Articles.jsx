@@ -84,22 +84,23 @@ export default function Articles(props) {
 
   return (
     <>
-      <div className="sortHeader">
-        <h2>{topic_name || "recently added"}</h2>
         {topic_name ? (
+          <div className="sortHeader">
+           <h2>{topic_name}</h2>
           <Sorter
             topic_name={topic_name}
             setArticles={setArticles}
             articles={articles}
             setSearchParams={setSearchParams}
           />
+          </div>
         ) : null}
-      </div>
+  
       {error || isLoadingArticles ? (
         error ? (
           <Error error={error} />
         ) : (
-          <p>Loading articles...</p>
+          null
         )
       ) : (
         <>

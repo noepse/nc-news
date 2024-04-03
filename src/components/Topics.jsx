@@ -8,6 +8,8 @@ import * as React from "react";
 
 export default function Topics(props) {
 
+  const {onClick} = props
+
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,19 +23,16 @@ export default function Topics(props) {
 
   return (
     <>
-      <section id="topics">
+      <section id="topics" onClick={onClick}>
         {isLoading ? (
           <p>Loading topics...</p>
         ) : (
           <>
+          <h2>topics</h2>
             {topics.map((topic) => {
               return <TopicCard key={topic.slug} topic={topic} />;
             })}
-            <Button
-              variant="text"
-            >
               <Link to={`/articles/all`}>view all</Link>
-            </Button>
           </>
         )}
       </section>

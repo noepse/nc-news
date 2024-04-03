@@ -16,8 +16,7 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import CloseIcon from '@mui/icons-material/Close';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -32,10 +31,10 @@ const drawerWidth = '100vw';
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  padding: theme.spacing(0, 1),
+  padding: '1em 2em',
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-  justifyContent: 'flex-start',
+  justifyContent: 'space-between',
 }));
 
 export default function Header() {
@@ -52,8 +51,6 @@ export default function Header() {
     setOpen(false);
   };
 
-  const theme = useTheme();
-
   const [openDrawer, setOpenDrawer] = useState(false)
 
   const handleDrawerOpen = () => {
@@ -68,15 +65,14 @@ export default function Header() {
 
   return (
     <><header>
-      <div className="headerContainer">
-      <>
+            <div className="headerContainer">
       <CssBaseline />
       <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            sx={{ mr: 0, ...(open && { display: 'none' }) }}
           ><MenuIcon /></IconButton>
           <h1>
           <Link to="/">newsie</Link>
@@ -86,6 +82,7 @@ export default function Header() {
             <Avatar alt="Logged in user avatar" src={currentUser.avatar_url} onClick={handleClickOpen} id="headerAvatar" style={{cursor: 'pointer'}}/>
           </Tooltip>
         </div>
+        </div>
       <Drawer
         sx={{
           width: drawerWidth,
@@ -93,16 +90,22 @@ export default function Header() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            borderBottom: '2px solid rgb(208, 208, 208)'
           },
         }}
-        variant="persistent"
+        variant="temporary"
         anchor="top"
         open={openDrawer}
+        onClose={handleDrawerClose}
         SlideProps={{easing: { enter: '0', exit: '0' }}}
       >
         <DrawerHeader >
-          <IconButton onClick={handleDrawerClose} >
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          <IconButton color="inherit"
+            aria-label="close drawer"
+            onClick={handleDrawerClose}
+            edge="start"
+            sx={{ mr: 0}} >
+            <CloseIcon />
           </IconButton>
           <h1>
           <Link to="/">newsie</Link>
@@ -113,15 +116,10 @@ export default function Header() {
           </Tooltip>
         </div>
         </DrawerHeader>
-        <Divider />
-        
-        <Divider />
-        <Topics />
+        <Topics onClick={handleDrawerClose}/>
       </Drawer>
-      </>
 
-        
-      </div>
+      
     </header><div>
         <br />
         <ChangeUser
