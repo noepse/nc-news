@@ -5,6 +5,6 @@ import * as React from 'react';
 export default function TopicCard(props){
     const {topic} = props
     return (
-        <Button variant="outlined" color="secondary"><Link to = {`/articles/${topic.slug}`}>{topic.slug}</Link></Button>
+        <Link to = {`/articles/${topic.slug}`} id="topicHeader">{topic.slug}</Link>
     
 )}

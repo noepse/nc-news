@@ -26,7 +26,6 @@ export default function Home(props){
         data-testid="loader"
       />
       </Backdrop> : null}
-        <Topics setArticles={setArticles} setIsLoadingArticles={setIsLoadingArticles}/>
         <Articles setCurrentArticle={setCurrentArticle} articles={articles} setArticles={setArticles}  isLoadingArticles={isLoadingArticles} setIsLoadingArticles={setIsLoadingArticles} />
         </>
 

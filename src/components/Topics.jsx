@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { getTopics } from "../utils/api";
+
 import TopicCard from "./TopicCard";
 
 import { Link } from "react-router-dom";
@@ -7,6 +8,8 @@ import Button from "@mui/material/Button";
 import * as React from "react";
 
 export default function Topics(props) {
+
+  const {onClick} = props
 
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +24,8 @@ export default function Topics(props) {
 
   return (
     <>
-      <section id="topics">
+      <section id="topics" onClick={onClick}>
+      <h2 id="articleTopic">TOPICS</h2>
         {isLoading ? (
           <p>Loading topics...</p>
         ) : (
@@ -29,11 +33,7 @@ export default function Topics(props) {
             {topics.map((topic) => {
               return <TopicCard key={topic.slug} topic={topic} />;
             })}
-            <Button
-              variant="text"
-            >
-              <Link to={`/articles/all`}>view all</Link>
-            </Button>
+              <Link to={`/articles/all`} id="articleTopic">VIEW ALL</Link>
           </>
         )}
       </section>
