@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { getTopics } from "../utils/api";
+
 import TopicCard from "./TopicCard";
 
 import { Link } from "react-router-dom";
@@ -24,15 +25,15 @@ export default function Topics(props) {
   return (
     <>
       <section id="topics" onClick={onClick}>
+      <h2 id="articleTopic">TOPICS</h2>
         {isLoading ? (
           <p>Loading topics...</p>
         ) : (
           <>
-          <h2>topics</h2>
             {topics.map((topic) => {
               return <TopicCard key={topic.slug} topic={topic} />;
             })}
-              <Link to={`/articles/all`}>view all</Link>
+              <Link to={`/articles/all`} id="articleTopic">VIEW ALL</Link>
           </>
         )}
       </section>

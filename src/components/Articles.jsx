@@ -86,7 +86,7 @@ export default function Articles(props) {
     <>
         {topic_name ? (
           <div className="sortHeader">
-           <h2>{topic_name}</h2>
+           <h2 id="topicHeader" style={{fontWeight: 'normal'}}>{topic_name}</h2>
           <Sorter
             topic_name={topic_name}
             setArticles={setArticles}

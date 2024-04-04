@@ -9,20 +9,12 @@ import Topics from './Topics';
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 
 import ChangeUser from "./ChangeUser";
 
@@ -40,6 +32,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function Header() {
   
   const { currentUser } = useContext(CurrentUserContext);
+
+
 
   const [open, setOpen] = useState(false);
 
