@@ -48,8 +48,6 @@ npm run dev
 
 ### Future features
 
-- Change user
-- Post new articles
 - Search articles by search query
 
 ## Contact
